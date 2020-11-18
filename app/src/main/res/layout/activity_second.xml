@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/gaming_dice_cards_casino_chips_dark_background"
+        >
+
+        <TextView
+            android:id="@+id/second_TXT_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="40dp"
+            android:text="The Winner" />
+
+            <ImageView
+                android:id="@+id/second_IMG_winner"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:padding="20dp"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/second_TXT_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:text="The Score : " />
+        <Button
+            android:id="@+id/second_BTN_newGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Game" />
+
+    </LinearLayout>
+</RelativeLayout>

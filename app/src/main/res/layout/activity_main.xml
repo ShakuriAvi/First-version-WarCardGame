@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/main_TXT_firstScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:text="0"
+                android:textSize="50sp" />
+
+            <ImageView
+                android:id="@+id/main_IMG_firstPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="50dp"
+                app:srcCompat="@drawable/man" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/main_IMG_firstBackCard"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    app:srcCompat="@drawable/poker_back_card" />
+
+                <ImageView
+                    android:id="@+id/main_IMG_secondBackCard"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    app:srcCompat="@drawable/poker_back_card" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/main_IMG_playButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/play_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/main_TXT_secondPlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="50dp"
+                android:text="0"
+                android:textSize="50sp" />
+
+            <ImageView
+                android:id="@+id/main_IMG_secondPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="50dp"
+                app:srcCompat="@drawable/teacher" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
