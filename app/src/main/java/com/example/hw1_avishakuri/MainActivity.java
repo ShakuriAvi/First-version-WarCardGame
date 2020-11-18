@@ -2,28 +2,17 @@ package com.example.hw1_avishakuri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-//ArrayList<Integer> imageViewArray;
-int temp = 0;
-private final int numOfPlayer = 2;
-private Package thePackage;
-private Characters theCharacters;
 ImageView click;
-Player player1;
-Player player2;
 TextView txtViewScorePlayer1;
 int score1;
 TextView txtViewScorePlayer2;
@@ -39,32 +28,21 @@ ImageView secondBackCardImage;
         setContentView(R.layout.activity_main);
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
        // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Log.d("try1","success");
-        game();
-
-
-    }
-
-    private void game() {
-        initPackageCard();
-
-        initCharacters();
-
-        initPlayers();
-
-        initView();
-
-        initGame();
-
+     //   Log.d("try1","success");
+        Game game = new Game( initCharacters(),initPackageCard());
+        initView(game);
+        clickOnPlay(game);
 
     }
 
-    private void initView() {
+
+
+    private void initView(Game game) {
         click = findViewById(R.id.main_IMG_playButton);
         firstImagePlayer = findViewById(R.id.main_IMG_firstPlayer);
-        firstImagePlayer.setImageResource(player1.getIdImage());
+        firstImagePlayer.setImageResource(game.getPlayer1().getIdImage());
         secondImagePlayer = findViewById(R.id.main_IMG_secondPlayer);
-        secondImagePlayer.setImageResource(player2.getIdImage());
+        secondImagePlayer.setImageResource(game.getPlayer2().getIdImage());
         firstBackCardImage = findViewById(R.id.main_IMG_firstBackCard);
         secondBackCardImage = findViewById(R.id.main_IMG_secondBackCard);
         txtViewScorePlayer1 = findViewById(R.id.main_TXT_firstScore);
@@ -73,14 +51,14 @@ ImageView secondBackCardImage;
         score2=0;
     }
 
-    private void initGame() {
+    private void clickOnPlay(Game game) {
         click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(thePackage.getPackage().size()==0)
+                if(game.getThePackage().getCards().size()==0)
                 {
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    int idWin = score1 > score2 ? player1.getIdImage() :  player2.getIdImage();
+                    int idWin = score1 > score2 ?game.getPlayer1().getIdImage() :  game.getPlayer2().getIdImage();
                     int scoreWin = score1 > score2 ? score1 : score2;
                     intent.putExtra("EXTRA_KEY_ID_IMAGE",(idWin));
                     intent.putExtra("EXTRA_KEY_SCORE",scoreWin);
@@ -88,11 +66,10 @@ ImageView secondBackCardImage;
                     finish();
                 }
                 else {
-                    Card choiceCard1 = randomCard();
-                    Card choiceCard2 = randomCard();
-                    Log.d("try0"," "+ choiceCard1.getValue() + " " +choiceCard2.getValue() + " card " + (52-temp));
-                    viewCard(choiceCard1, choiceCard2);
-                    rulesGame(choiceCard1, choiceCard2);
+                    int result = game.play();
+                    Log.d("try0"," "+ game.getChoiceCard1().getValue() + " " +game.getChoiceCard2().getValue() + " card " );
+                    viewCard(game.getChoiceCard1(), game.getChoiceCard2());
+                    rulesGame(result);
                 }
             }
         });
@@ -104,45 +81,19 @@ ImageView secondBackCardImage;
         secondBackCardImage.setImageResource(choiceCard2.getIdSymbol());
     }
 
-    private void rulesGame(Card choiceCard1, Card choiceCard2) {
+    private void rulesGame(int result) {
 
-        if(choiceCard1.getValue() > choiceCard2.getValue())
+        if(result == 1)
             txtViewScorePlayer1.setText(" "+ ++score1);
-        else if(choiceCard1.getValue() < choiceCard2.getValue())
+        else if(result == 2)
             txtViewScorePlayer2.setText(" " + ++score2);
 
     }
 
 
-    private Card randomCard() {
-        Card choiceCard;
-        Random rand1 = new Random();
-        int randChoice = thePackage.getPackage().size()==1? 0 : rand1.nextInt((thePackage.getPackage().size()-1));//choice package
-        choiceCard = thePackage.getPackage().get(randChoice);
-        thePackage.getPackage().remove(randChoice);
-    temp++;
-        return choiceCard;
-    }
+    private Characters initCharacters() {
 
-
-
-    private void initPlayers() {
-      player1=  randomPlayer();
-      player2 = randomPlayer();
-    }
-
-    private Player randomPlayer() {
-            Random rand1 = new Random();
-            int randChoice = rand1.nextInt(theCharacters.getPlayersArray().size()-1);
-            Player newPlayer = theCharacters.getPlayersArray().get(randChoice);
-            theCharacters.getPlayersArray().remove(randChoice);
-
-            return newPlayer;
-    }
-
-    private void initCharacters() {
-
-        theCharacters = new Characters();
+        Characters theCharacters = new Characters();
         theCharacters.getPlayersArray().add(new Player("don quixote",0));
         initViewCharc(R.drawable.don_quixote,theCharacters.getPlayersArray().get(0));
         theCharacters.getPlayersArray().add(new Player("cowgirl",0));
@@ -155,13 +106,14 @@ ImageView secondBackCardImage;
         initViewCharc(R.drawable.business_man,theCharacters.getPlayersArray().get(4));
         theCharacters.getPlayersArray().add(new Player("old man",0));
         initViewCharc(R.drawable.old_man,theCharacters.getPlayersArray().get(5));
+        return theCharacters;
     }
     private void initViewCharc(int id, Player newPlayer) {
         newPlayer.setIdImage(id);
     }
 
-    private void initPackageCard() {
-        thePackage = new Package();
+    private Package initPackageCard() {
+        Package thePackage = new Package();
     int t = 0;
         Character[] ch = {'c', 'd', 'h', 's'};
         for (int i = 2; i < 15; i++) {
@@ -173,7 +125,7 @@ ImageView secondBackCardImage;
                 thePackage.setCardInPack(newCard);
             }
         }
-
+            return  thePackage;
     }
 
     private void initViewCard(int id,Card newCard) {

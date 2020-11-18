@@ -17,7 +17,7 @@ public class Package {
    }
 
 
-   public ArrayList<Card> getPackage() {
+   public ArrayList<Card> getCards() {
       return packageOfCard;
    }
 
