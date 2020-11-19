@@ -1,43 +1,64 @@
 package com.example.hw1_avishakuri;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
-ImageView click;
-TextView txtViewScorePlayer1;
-int score1;
-TextView txtViewScorePlayer2;
-int score2;
-ImageView firstImagePlayer;
-ImageView secondImagePlayer;
-ImageView firstBackCardImage;
-ImageView secondBackCardImage;
+    int temp = 0;//check num of cards its for me
+private ImageView click;//click on image for movw card
+private Game game;//the rule of game: move two card, choose random player,etc...
+private TextView txtViewScorePlayer1;
+private int score1;//get from the class game who need get point
+private TextView txtViewScorePlayer2;
+private int score2;
+private int idDraw;// id of package draw
+private ImageView firstImagePlayer;
+private ImageView secondImagePlayer;
+private ImageView firstBackCardImage;
+private ImageView secondBackCardImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-       // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-     //   Log.d("try1","success");
-        Game game = new Game( initCharacters(),initPackageCard());
-        initView(game);
-        clickOnPlay(game);
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        game = new Game(initCharacters(), initPackageCard());
+        initView();
+        clickOnPlay();
+    }
+        /*
+        if you want to show the game on the length screen and move width.
+        try {
+            if(savedInstanceState !=null){
+                int previousScore1= savedInstanceState.getInt("MY_SCORE1");
+                int previousScore2= savedInstanceState.getInt("MY_SCORE2");
+                score1 = previousScore1;
+                score2 = previousScore2;
+                txtViewScorePlayer1.setText(" "+ score1);
+                txtViewScorePlayer2.setText(" "+ score2);
+              //  ArrayList<Card> arrCard=  savedInstanceState.getParcelableArrayList("MY_ARR");
+               // game.getThePackage().setCards(arrCard);
+            }
+        }   catch (Exception ex) { }
 
     }
 
 
-
-    private void initView(Game game) {
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.d("pttt", "onSaveInstanceState");
+        super.onSaveInstanceState(outState);
+        outState.putInt("MY_SCORE1", score1);
+        outState.putInt("MY_SCORE2", score2);
+       // outState.putParcelableArrayList("MY_ARR", game.getThePackage().ge);
+    }
+*/
+    private void initView() { //init all view and score
         click = findViewById(R.id.main_IMG_playButton);
         firstImagePlayer = findViewById(R.id.main_IMG_firstPlayer);
         firstImagePlayer.setImageResource(game.getPlayer1().getIdImage());
@@ -49,16 +70,18 @@ ImageView secondBackCardImage;
         txtViewScorePlayer2 = findViewById(R.id.main_TXT_secondPlayer);
         score1 = 0;
         score2=0;
+        idDraw = getResources().getIdentifier("draw_flag", "drawable",this.getPackageName());
     }
 
-    private void clickOnPlay(Game game) {
+    private void clickOnPlay() { //the action click on image play
+
         click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(game.getThePackage().getCards().size()==0)
                 {
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    int idWin = score1 > score2 ?game.getPlayer1().getIdImage() :  game.getPlayer2().getIdImage();
+                    int idWin = score1 > score2 ?game.getPlayer1().getIdImage() : score1 < score2 ? game.getPlayer2().getIdImage() : idDraw; //if that check who win
                     int scoreWin = score1 > score2 ? score1 : score2;
                     intent.putExtra("EXTRA_KEY_ID_IMAGE",(idWin));
                     intent.putExtra("EXTRA_KEY_SCORE",scoreWin);
@@ -66,32 +89,30 @@ ImageView secondBackCardImage;
                     finish();
                 }
                 else {
-                    int result = game.play();
-                    Log.d("try0"," "+ game.getChoiceCard1().getValue() + " " +game.getChoiceCard2().getValue() + " card " );
-                    viewCard(game.getChoiceCard1(), game.getChoiceCard2());
-                    rulesGame(result);
+                    temp+=2;//just check num of cards
+                    int result = game.play(); // the function that replace the cards and return who win in this round
+                    Log.d("try0"," "+ game.getChoiceCard1().getValue() + " " +game.getChoiceCard2().getValue() + " card " + (52-temp));//this is for me for check if the value card match
+                    viewCard(game.getChoiceCard1(), game.getChoiceCard2());//show the view card in screen
+                    addPoint(result);//show the point and add score for the win round
                 }
             }
         });
     }
 
     private void viewCard(Card choiceCard1,Card choiceCard2) {
-
         firstBackCardImage.setImageResource(choiceCard1.getIdSymbol());
         secondBackCardImage.setImageResource(choiceCard2.getIdSymbol());
     }
 
-    private void rulesGame(int result) {
-
+    private void addPoint(int result) {
         if(result == 1)
             txtViewScorePlayer1.setText(" "+ ++score1);
         else if(result == 2)
             txtViewScorePlayer2.setText(" " + ++score2);
-
     }
 
 
-    private Characters initCharacters() {
+    private Characters initCharacters() {//return Characters for init Characters Player in class game. I cant init the Characters in Game becuase there is UI
 
         Characters theCharacters = new Characters();
         theCharacters.getPlayersArray().add(new Player("don quixote",0));
@@ -112,9 +133,8 @@ ImageView secondBackCardImage;
         newPlayer.setIdImage(id);
     }
 
-    private Package initPackageCard() {
+    private Package initPackageCard() {// return package for init package card in class game. I cant init the package in Game becuase there is UI
         Package thePackage = new Package();
-    int t = 0;
         Character[] ch = {'c', 'd', 'h', 's'};
         for (int i = 2; i < 15; i++) {
             for (int j = 0; j < ch.length; j++) {
