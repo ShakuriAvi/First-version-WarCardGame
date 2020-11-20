@@ -1,10 +1,15 @@
 package com.example.hw1_avishakuri;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,15 +29,18 @@ private ImageView secondBackCardImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+       // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         game = new Game(initCharacters(), initPackageCard());
         initView();
         clickOnPlay();
     }
-        /*
-        if you want to show the game on the length screen and move width.
+    //}
+/*
+   //     if you want to show the game on the length screen and move width.
         try {
             if(savedInstanceState !=null){
                 int previousScore1= savedInstanceState.getInt("MY_SCORE1");
@@ -41,8 +49,7 @@ private ImageView secondBackCardImage;
                 score2 = previousScore2;
                 txtViewScorePlayer1.setText(" "+ score1);
                 txtViewScorePlayer2.setText(" "+ score2);
-              //  ArrayList<Card> arrCard=  savedInstanceState.getParcelableArrayList("MY_ARR");
-               // game.getThePackage().setCards(arrCard);
+              //  game = savedInstanceState.getParcelable("MY_GAME");
             }
         }   catch (Exception ex) { }
 
@@ -55,7 +62,7 @@ private ImageView secondBackCardImage;
         super.onSaveInstanceState(outState);
         outState.putInt("MY_SCORE1", score1);
         outState.putInt("MY_SCORE2", score2);
-       // outState.putParcelableArrayList("MY_ARR", game.getThePackage().ge);
+        //outState.putParcelable("MY_GAME",game);
     }
 */
     private void initView() { //init all view and score

@@ -1,5 +1,8 @@
 package com.example.hw1_avishakuri;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Random;
 
 public class Game {

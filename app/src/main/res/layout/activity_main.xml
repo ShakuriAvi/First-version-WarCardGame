@@ -51,6 +51,7 @@
                 <ImageView
                     android:id="@+id/main_IMG_firstBackCard"
                     android:layout_width="50dp"
+                    android:layout_marginTop="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     app:srcCompat="@drawable/poker_back_card" />
@@ -58,6 +59,7 @@
                 <ImageView
                     android:id="@+id/main_IMG_secondBackCard"
                     android:layout_width="50dp"
+                    android:layout_marginTop="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     app:srcCompat="@drawable/poker_back_card" />
