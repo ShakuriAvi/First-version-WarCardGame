@@ -1,20 +1,22 @@
 package com.example.hw1_avishakuri;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    int temp = 0;//check num of cards its for me
+private int temp = 0;//check num of cards its for me
+private double timeInPercent = 0;
 private ImageView click;//click on image for movw card
 private Game game;//the rule of game: move two card, choose random player,etc...
 private TextView txtViewScorePlayer1;
@@ -26,6 +28,7 @@ private ImageView firstImagePlayer;
 private ImageView secondImagePlayer;
 private ImageView firstBackCardImage;
 private ImageView secondBackCardImage;
+private ProgressBar prg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,11 @@ private ImageView secondBackCardImage;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         game = new Game(initCharacters(), initPackageCard());
         initView();
-        clickOnPlay();
+       // clickOnPlay();
     }
+
+
+
     //}
 /*
    //     if you want to show the game on the length screen and move width.
@@ -75,6 +81,7 @@ private ImageView secondBackCardImage;
         secondBackCardImage = findViewById(R.id.main_IMG_secondBackCard);
         txtViewScorePlayer1 = findViewById(R.id.main_TXT_firstScore);
         txtViewScorePlayer2 = findViewById(R.id.main_TXT_secondPlayer);
+        prg = findViewById(R.id.main_PRG_timeGame);
         score1 = 0;
         score2=0;
         idDraw = getResources().getIdentifier("draw_flag", "drawable",this.getPackageName());
@@ -83,27 +90,70 @@ private ImageView secondBackCardImage;
     private void clickOnPlay() { //the action click on image play
 
         click.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                if(game.getThePackage().getCards().size()==0)
-                {
-                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    int idWin = score1 > score2 ?game.getPlayer1().getIdImage() : score1 < score2 ? game.getPlayer2().getIdImage() : idDraw; //if that check who win
-                    int scoreWin = score1 > score2 ? score1 : score2;
-                    intent.putExtra("EXTRA_KEY_ID_IMAGE",(idWin));
-                    intent.putExtra("EXTRA_KEY_SCORE",scoreWin);
-                    startActivity(intent);
-                    finish();
+                        timer();
+                }
+        });
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        clickOnPlay();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+    private void timer() {
+        final Handler handler = new Handler();
+        final int delay = 1000;
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (game.getThePackage().getCards().size() != 0) {
+                        moveCard();
+                        handler.postDelayed(this, delay);
+
                 }
                 else {
-                    temp+=2;//just check num of cards
-                    int result = game.play(); // the function that replace the cards and return who win in this round
-                    Log.d("try0"," "+ game.getChoiceCard1().getValue() + " " +game.getChoiceCard2().getValue() + " card " + (52-temp));//this is for me for check if the value card match
-                    viewCard(game.getChoiceCard1(), game.getChoiceCard2());//show the view card in screen
-                    addPoint(result);//show the point and add score for the win round
+                    moveToFinishPage();
                 }
             }
-        });
+        },delay);
+    }
+    private void moveCard(){
+        timeInPercent =100 - (100 *(52 - temp))/52;
+        temp += 2;//just check num of cards
+        int result = game.play(); // the function that replace the cards and return who win in this round
+        Log.d("try0", " " + game.getChoiceCard1().getValue() + " " + game.getChoiceCard2().getValue() + " card " + (52 - temp) +" time in percent " + timeInPercent);//this is for me for check if the value card match
+        viewCard(game.getChoiceCard1(), game.getChoiceCard2());//show the view card in screen
+        addPoint(result);//show the point and add score for the win round
+        prg.setProgress((int)timeInPercent);
+        playSound(R.raw.snd_poker_chips);
+
+    }
+    private void moveToFinishPage() {
+        if (game.getThePackage().getCards().size() == 0) {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            int idWin = score1 > score2 ? game.getPlayer1().getIdImage() : score1 < score2 ? game.getPlayer2().getIdImage() : idDraw; //if that check who win
+            int scoreWin = score1 > score2 ? score1 : score2;
+            intent.putExtra("EXTRA_KEY_ID_IMAGE", (idWin));
+            intent.putExtra("EXTRA_KEY_SCORE", scoreWin);
+            startActivity(intent);
+            finish();
+
+        }
+    }
+    private void playSound(int id){
+        MediaPlayer mp;
+        mp = MediaPlayer.create(this,id);
+        mp.start();
     }
 
     private void viewCard(Card choiceCard1,Card choiceCard2) {
