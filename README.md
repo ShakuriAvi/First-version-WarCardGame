@@ -1,4 +1,4 @@
-# HW1_WarGame
+# WarGame
 
 Card war game between two different game characters, there are many characters in the game that are randomly selected at the beginning of the game.
 
