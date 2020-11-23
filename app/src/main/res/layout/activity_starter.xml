@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_starter"
+        android:background="@drawable/background_field"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/starter_TXT_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
             android:layout_marginTop="50dp"
             android:fontFamily="casual"
+            android:textColor="@color/white"
             android:gravity="center"
             android:text="Card War"
             android:textSize="50dp" />
@@ -25,35 +25,34 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:gravity="center"
-            android:paddingLeft="150dp"
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/starter_BTN_playGame"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:backgroundTint="#3F51B5"
-                android:textColor="@color/black"
+                android:backgroundTint="#B53F5B"
+                android:textColor="@color/white"
 
                 android:text="Play" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/starter_BTN_Characters"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:backgroundTint="#3F51B5"
-                android:textColor="@color/black"
-                android:text="Choose Charcachters" />
+                android:backgroundTint="#B53F5B"
+                android:textColor="@color/white"
+                android:text="Choose Characters" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/starter_BTN_showTopTen"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:backgroundTint="#3F51B5"
-                android:textColor="@color/black"
+                android:backgroundTint="#B53F5B"
+                android:textColor="@color/white"
                 android:text="TOP 10" />
         </LinearLayout>
 

@@ -1,6 +1,5 @@
 package com.example.hw1_avishakuri;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -37,11 +36,19 @@ private ProgressBar prg;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        game = new Game(initCharacters(), initPackageCard());
+        Log.d("bbbb", "success4");
+        initGame();
+
         initView();
        // clickOnPlay();
     }
 
+    private void initGame() {
+        Characters tempCharc = (Characters) getIntent().getSerializableExtra("EXTRA_KEY_MY_CHARACTERS");
+        Player p1 = (Player) getIntent().getSerializableExtra("EXTRA_KEY_MY_PLAYER1");
+        Player p2 = (Player) getIntent().getSerializableExtra("EXTRA_KEY_MY_PLAYER2");
+        game = new Game(tempCharc, initPackageCard(),p1,p2);
+    }
 
 
     //}
@@ -168,7 +175,7 @@ private ProgressBar prg;
             txtViewScorePlayer2.setText(" " + ++score2);
     }
 
-
+/*
     private Characters initCharacters() {//return Characters for init Characters Player in class game. I cant init the Characters in Game becuase there is UI
 
         Characters theCharacters = new Characters();
@@ -189,7 +196,7 @@ private ProgressBar prg;
     private void initViewCharc(int id, Player newPlayer) {
         newPlayer.setIdImage(id);
     }
-
+*/
     private Package initPackageCard() {// return package for init package card in class game. I cant init the package in Game becuase there is UI
         Package thePackage = new Package();
         Character[] ch = {'c', 'd', 'h', 's'};
