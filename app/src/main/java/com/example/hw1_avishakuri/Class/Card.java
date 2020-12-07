@@ -1,7 +1,4 @@
-package com.example.hw1_avishakuri;
-
-import android.view.View;
-import android.widget.ImageView;
+package com.example.hw1_avishakuri.Class;
 
 public class Card {
 private int value;

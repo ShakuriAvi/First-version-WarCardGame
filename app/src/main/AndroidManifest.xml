@@ -2,25 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hw1_avishakuri">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="WarCard"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1_AviShakuri">
-
-        <activity android:name=".SecondActivity">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key"/>
+        <activity android:name=".Activity.FinishActivity">
             android:screenOrientation="landscape"
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.GameActivity">
             android:screenOrientation="landscape"
+        </activity>
+        <activity android:name=".Activity.SelectCharactersActivity">
+        </activity>
+        <activity android:name=".Activity.SettingActivity">
 
         </activity>
-        <activity android:name=".SelectCharactersActivity">
 
-        </activity>
-        <activity android:name=".StarterActivity" >
+    <activity android:name=".Activity.TopTenActivity">
+        android:screenOrientation="portrait"
+    </activity>
+
+        <activity android:name=".Activity.StarterActivity" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />

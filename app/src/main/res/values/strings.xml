@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">HW1_AviShakuri</string>
+    <string-array name="color_array">
+        <item>Green</item>
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Pink with cards</item>
+    </string-array>
 </resources>

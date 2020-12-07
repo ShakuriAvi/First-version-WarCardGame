@@ -23,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility sourceCompatibility
+        targetCompatibility targetCompatibility
     }
 }
 
@@ -33,7 +33,18 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    testImplementation 'junit:junit:4.+'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    // Glide (image loading framework)
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // Gson (convert Java Objects into their JSON representation)
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+
 }

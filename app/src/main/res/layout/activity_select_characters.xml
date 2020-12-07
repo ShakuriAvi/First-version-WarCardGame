@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,11 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@color/black"
+        android:background="@color/green"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/select_TXT_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
@@ -36,6 +36,7 @@
 
                 <ImageView
                     android:id="@+id/select_IMG_teacher"
+                    android:tag="teacher"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:onClick="clickOnImage"
@@ -46,6 +47,7 @@
                     android:id="@+id/select_IMG_oldMan"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:tag="old man"
                     android:onClick="clickOnImage"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/old_man" />
@@ -54,6 +56,7 @@
                     android:id="@+id/select_IMG_ninja"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:tag="ninja"
                     android:onClick="clickOnImage"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/ninja" />
@@ -62,6 +65,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_weight="3"
                 android:orientation="vertical">
 
@@ -69,6 +73,7 @@
                     android:id="@+id/select_IMG_man"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:tag="man"
                     android:onClick="clickOnImage"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/man" />
@@ -78,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:onClick="clickOnImage"
+                    android:tag="king"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/king" />
 
@@ -86,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:onClick="clickOnImage"
+                    android:tag="don quixote"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/don_quixote" />
             </LinearLayout>
@@ -102,6 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:onClick="clickOnImage"
+                    android:tag="cow girl"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/cowgirl" />
 
@@ -110,6 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:onClick="clickOnImage"
+                    android:tag="business man"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/business_man" />
 
@@ -118,6 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:onClick="clickOnImage"
+                    android:tag="banshee"
                     android:layout_margin="5dp"
                     app:srcCompat="@drawable/banshee" />
             </LinearLayout>
@@ -128,7 +138,7 @@
             android:id="@+id/starter_TXT_split"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/yellow"
+            android:background="@color/white"
             android:text="" />
 
         <LinearLayout
@@ -143,7 +153,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/banshee" />
+                app:srcCompat="@drawable/question" />
 
             <TextView
                 android:id="@+id/starter_TXT_titleFight"
@@ -162,14 +172,14 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/teacher" />
+                app:srcCompat="@drawable/question" />
         </LinearLayout>
 
         <Button
             android:id="@+id/starter_BTN_return"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/green"
             android:layout_margin="4dp"
             android:text="return" />
 

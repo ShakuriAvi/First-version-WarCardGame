@@ -1,9 +1,5 @@
-package com.example.hw1_avishakuri;
+package com.example.hw1_avishakuri.Class;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.Serializable;
 import java.util.Random;
 
 public class Game {

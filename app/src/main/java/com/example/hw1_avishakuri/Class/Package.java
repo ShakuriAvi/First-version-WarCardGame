@@ -1,9 +1,6 @@
-package com.example.hw1_avishakuri;
+package com.example.hw1_avishakuri.Class;
 
 
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.ArrayList;
 public class Package {
@@ -11,7 +8,7 @@ public class Package {
 
 
    public Package(){
-      this.packageOfCard = new ArrayList<>();
+      this.packageOfCard = new ArrayList<Card>();
 
    }
 

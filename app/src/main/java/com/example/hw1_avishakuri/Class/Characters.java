@@ -1,17 +1,12 @@
-package com.example.hw1_avishakuri;
+package com.example.hw1_avishakuri.Class;
 
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Characters implements Serializable {
+public class Characters {
 private ArrayList<Player> playersArray;
 
     public Characters(){
-        this.playersArray = new ArrayList<>();
+        this.playersArray = new ArrayList<Player>();
     }
     public ArrayList<Player> getPlayersArray() {
         return playersArray;
@@ -23,7 +18,7 @@ private ArrayList<Player> playersArray;
     }
     public Player getPlayerByName(String name){
         for (int i = 0; i <playersArray.size() ; i++) {
-            if(playersArray.get(i).getName().contains(name))
+            if(playersArray.get(i).getName().equals(name))
                 return playersArray.get(i);
         }
         return null;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.TopTenActivity"
+    android:background="@color/green"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/topTen_LAY_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:background="#45454545"/>
+
+    <Button
+        android:id="@+id/topTen_BTN_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:text="Menu" />
+
+    <FrameLayout
+        android:id="@+id/topTen_LAY_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:background="#45454545">
+
+    </FrameLayout>
+
+</LinearLayout>

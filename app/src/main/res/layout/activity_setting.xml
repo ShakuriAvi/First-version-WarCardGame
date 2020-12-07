@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/setting_TXT_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="Setting"
+            android:textColor="@color/white"
+            android:textSize="40dp" />
+
+        <Switch
+            android:id="@+id/setting_SWITCH_autoGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:layout_margin="20dp"
+            android:textSize="30dp"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:text="Autamatic Game" />
+
+        <Switch
+            android:id="@+id/setting_SWITCH_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:layout_margin="20dp"
+            android:textSize="30dp"
+            android:clickable="true"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:text="Sound" />
+
+        <Button
+            android:id="@+id/setting_BTN_return"
+
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:layout_margin="4dp"
+            android:text="return" />
+
+    </LinearLayout>
+
+</RelativeLayout>

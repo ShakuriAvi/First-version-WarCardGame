@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/starter_IMG_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:srcCompat="@color/white" />
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_field"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/starter_TXT_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="casual"
             android:textColor="@color/white"
             android:gravity="center"
@@ -54,7 +61,17 @@
                 android:backgroundTint="#B53F5B"
                 android:textColor="@color/white"
                 android:text="TOP 10" />
+            <Button
+                android:id="@+id/starter_BTN_setting"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="#B53F5B"
+                android:textColor="@color/white"
+                android:text="SETTING" />
         </LinearLayout>
 
     </LinearLayout>
+
+
 </RelativeLayout>
