@@ -5,19 +5,18 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/starter_IMG_background"
+        android:id="@+id/menu_IMG_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         app:srcCompat="@color/white" />
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/starter_TXT_title"
+            android:id="@+id/menu_TXT_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -35,7 +34,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/starter_BTN_playGame"
+                android:id="@+id/menu_BTN_playGame"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -45,7 +44,7 @@
                 android:text="Play" />
 
             <Button
-                android:id="@+id/starter_BTN_Characters"
+                android:id="@+id/menu_BTN_Characters"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -54,7 +53,7 @@
                 android:text="Choose Characters" />
 
             <Button
-                android:id="@+id/starter_BTN_showTopTen"
+                android:id="@+id/menu_BTN_showTopTen"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -62,7 +61,7 @@
                 android:textColor="@color/white"
                 android:text="TOP 10" />
             <Button
-                android:id="@+id/starter_BTN_setting"
+                android:id="@+id/menu_BTN_setting"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

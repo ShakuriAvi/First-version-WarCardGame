@@ -2,7 +2,6 @@ package com.example.hw1_avishakuri.Controller;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,22 +20,27 @@ import com.example.hw1_avishakuri.Class.Player;
 import com.example.hw1_avishakuri.R;
 import com.google.gson.Gson;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class InitGameViewController {
     private int temp = 0;//check num of cards its for me
     private double timeInPercent = 0;
     private AppCompatActivity activity;
     private Characters theCharacters;
-    private ImageView click;//click on image for movw card
-    private TextView txtViewScorePlayer1;
-    private TextView txtViewScorePlayer2;
-    private ImageView imgFirstImagePlayer;
-    private ImageView imgSecondImagePlayer;
-    private ImageView imgFirstBackCardImage;
-    private ImageView imgSecondBackCardImage;
+    private ImageView game_IMG_button;//click on image for movw card
+    private TextView game_TXT_scorePlayer1;
+    private TextView game_TXT_scorePlayer2;
+    private ImageView game_IMG_firstImagePlayer;
+    private ImageView game_IMG_secondImagePlayer;
+    private ImageView game_IMG_firstBackCardImage;
+    private ImageView game_IMG_secondBackCardImage;
     private ProgressBar prg;
     private Game game;
     private boolean boolSound ;
     private boolean boolAutoGame;
+    private boolean isClicked = false;
+    int delay = 1000;
     public InitGameViewController(AppCompatActivity activity) {
         this.activity = activity;
     }
@@ -73,31 +77,33 @@ public class InitGameViewController {
 
     public void initView(AppCompatActivity activity , Game theGame) { //init all view and score
         game = theGame;
-        click = activity.findViewById(R.id.main_IMG_playButton);
-        imgFirstImagePlayer = activity.findViewById(R.id.main_IMG_firstPlayer);
-        imgFirstImagePlayer.setImageResource(game.getPlayer1().getIdImage());
-        imgSecondImagePlayer = activity.findViewById(R.id.main_IMG_secondPlayer);
-        imgSecondImagePlayer.setImageResource(game.getPlayer2().getIdImage());
-        imgFirstBackCardImage = activity.findViewById(R.id.main_IMG_firstBackCard);
-        imgSecondBackCardImage = activity.findViewById(R.id.main_IMG_secondBackCard);
-        txtViewScorePlayer1 = activity.findViewById(R.id.main_TXT_firstScore);
-        txtViewScorePlayer2 = activity.findViewById(R.id.main_TXT_secondPlayer);
-        prg = activity.findViewById(R.id.main_PRG_timeGame);
+        game_IMG_button = activity.findViewById(R.id.game_IMG_playButton);
+        game_IMG_firstImagePlayer = activity.findViewById(R.id.game_IMG_firstPlayer);
+        game_IMG_firstImagePlayer.setImageResource(game.getPlayer1().getIdImage());
+        game_IMG_secondImagePlayer = activity.findViewById(R.id.game_IMG_secondPlayer);
+        game_IMG_secondImagePlayer.setImageResource(game.getPlayer2().getIdImage());
+        game_IMG_firstBackCardImage = activity.findViewById(R.id.game_IMG_firstBackCard);
+        game_IMG_secondBackCardImage = activity.findViewById(R.id.game_IMG_secondBackCard);
+        game_TXT_scorePlayer1 = activity.findViewById(R.id.game_TXT_firstScore);
+        game_TXT_scorePlayer2 = activity.findViewById(R.id.game_TXT_secondPlayer);
+        prg = activity.findViewById(R.id.game_PRG_timeGame);
        game.getPlayer1().setScore(0);
         game.getPlayer2().setScore(0);
 
     }
-    public void clickOnPlay(final boolean boolAutoGame, boolean boolSound) { //the action click on image play
+    public void clickOnPlay(final boolean boolAutoGame, boolean boolSound ) { //the action click on image play
     this.boolAutoGame = boolAutoGame;
     this.boolSound = boolSound;
-    click.setOnClickListener(new View.OnClickListener() {
+    game_IMG_button.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
 
             if (boolAutoGame == true) {
-                click.setEnabled(false);//Turns off the button after one press
-                timer();
+                isClicked = true;
+                game_IMG_button.setEnabled(false);//Turns off the button after one press
+                game_IMG_button.setClickable(false);
+                startCounting();
             }
             else {
                 if(game.getThePackage().getCards().size() != 0)
@@ -109,6 +115,9 @@ public class InitGameViewController {
         }
     });
 
+    }
+    public boolean isClickled() {
+        return isClicked;
     }
     public Package getPackageCard(AppCompatActivity activity) {// return package for init package card in class game. I cant init the package in Game becuase there is UI
         Package thePackage = new Package();
@@ -127,25 +136,42 @@ public class InitGameViewController {
     private void initViewCard(int id,Card newCard) {
         newCard.setIdSymbol(id);
     }
-    private void timer() {
-        final Handler handler = new Handler();
-        final int delay = 1000;
 
-        handler.postDelayed(new Runnable() {
+    private Timer carousalTimer;
+    public void startCounting() {
+        carousalTimer = new Timer();
+        carousalTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
 
-                if (game.getThePackage().getCards().size() != 0) {
-                    moveCard(activity);
-                    handler.postDelayed(this, delay);
 
+
+
+            activity.runOnUiThread(new Runnable() {
+
+
+                @Override
+                public void run() {
+                    if (game.getThePackage().getCards().size() != 0) {
+                        moveCard(activity);
+                        //handler.postDelayed(this, delay);
+                    }
+                    else {
+                        moveToFinishPage(activity);
+                    }
                 }
-                else {
-                    moveToFinishPage(activity);
-                }
+
+            });
             }
-        },delay);
+        }, 0, delay);
     }
+    public void stopCounting() {
+        carousalTimer.cancel();
+    }
+
+
+
+
     private void moveCard(AppCompatActivity activity){
         timeInPercent =100 - (100 *(52 - temp))/52;
         temp += 2;//just check num of cards
@@ -167,6 +193,8 @@ public class InitGameViewController {
             Gson gson = new Gson();
             String winner = gson.toJson(playerWin);
             intent.putExtra("EXTRA_KEY_WINNER", winner);
+            intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
+            intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
             activity.startActivity(intent);
             activity.finish();
 
@@ -182,11 +210,11 @@ public class InitGameViewController {
         Glide
                 .with(activity)
                 .load(choiceCard1.getIdSymbol())
-                .into(imgFirstBackCardImage);
+                .into(game_IMG_firstBackCardImage);
         Glide
                 .with(activity)
                 .load(choiceCard2.getIdSymbol())
-                .into(imgSecondBackCardImage);
+                .into(game_IMG_secondBackCardImage);
        // firstBackCardImage.setImageResource(choiceCard1.getIdSymbol());
        // secondBackCardImage.setImageResource(choiceCard2.getIdSymbol());
     }
@@ -194,12 +222,13 @@ public class InitGameViewController {
     private void addPoint(int result) {
         if(result == 1) {
             game.getPlayer1().setScore(game.getPlayer1().getScore()+1);
-            txtViewScorePlayer1.setText(" " + game.getPlayer1().getScore());
+            game_TXT_scorePlayer1.setText(" " + game.getPlayer1().getScore());
         }
         else if(result == 2) {
             game.getPlayer2().setScore(game.getPlayer2().getScore()+1);
-            txtViewScorePlayer2.setText(" " + game.getPlayer2().getScore());
+            game_TXT_scorePlayer2.setText(" " + game.getPlayer2().getScore());
         }
     }
+
 
 }

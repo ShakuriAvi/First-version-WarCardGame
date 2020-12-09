@@ -21,18 +21,18 @@ import java.util.ArrayList;
 
 import static com.example.hw1_avishakuri.Controller.Constants.SP_FILE;
 
-public class StarterActivity extends BaseActivity {
+public class MenuActivity extends BaseActivity {
     private InitGameViewController initGameViewController;
-    private Button btnGame;
-    private Button btnCharacters;
-    private Button btnTopTen;
-    private Button btnSetting;
+    private Button menu_BTN_game;
+    private Button menu_BTN_characters;
+    private Button menu_BTN_topTen;
+    private Button menu_BTN_setting;
     private Player player1;
     private Player player2;
-    private boolean boolAutoGame = true;
-    private boolean boolSound = true;
+    private boolean boolAutoGame ;
+    private boolean boolSound;
     private Gson gson;
-    private ImageView imgBackground;
+    private ImageView menu_IMG_background;
     private ArrayList<Player> topTenWinner;
 
 
@@ -40,8 +40,9 @@ public class StarterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starter);
+        setContentView(R.layout.activity_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        MyScreenUtils.hideSystemUI(this);
         isDoubleBackPressToClose = true;
         loadData();
         gson = new Gson();
@@ -71,14 +72,14 @@ public class StarterActivity extends BaseActivity {
     }
 
     private void clickOnButton() {
-        btnGame.setOnClickListener(new View.OnClickListener(){
+        menu_BTN_game.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 if(boolSound == true)
                     playSound(R.raw.tiny_button_push);
 
-                Intent intent = new Intent(StarterActivity.this, GameActivity.class);
+                Intent intent = new Intent(MenuActivity.this, GameActivity.class);
                 Gson gson = new Gson();
                 String p1 = gson.toJson(player1);
                 String p2 = gson.toJson(player2);
@@ -90,37 +91,39 @@ public class StarterActivity extends BaseActivity {
 
             }
         });
-        btnCharacters.setOnClickListener(new View.OnClickListener(){
+        menu_BTN_characters.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 if(boolSound == true)
                     playSound(R.raw.tiny_button_push);
-                Intent intent = new Intent(StarterActivity.this, SelectCharactersActivity.class);
+                Intent intent = new Intent(MenuActivity.this, SelectCharactersActivity.class);
                 intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
                 intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 startActivity(intent);
             }
         });
-        btnTopTen.setOnClickListener(new View.OnClickListener(){
+        menu_BTN_topTen.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 if(boolSound == true)
                     playSound(R.raw.tiny_button_push);
-                Intent intent = new Intent(StarterActivity.this, TopTenActivity.class);
+                Intent intent = new Intent(MenuActivity.this, TopTenActivity.class);
                 String arrayTopTen = gson.toJson(topTenWinner);
+                intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
+                intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 intent.putExtra("EXTRA_KEY_WINNERS", arrayTopTen);
                 startActivity(intent);
             }
         });
-        btnSetting.setOnClickListener(new View.OnClickListener(){
+        menu_BTN_setting.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 if(boolSound == true)
                     playSound(R.raw.tiny_button_push);
-                Intent intent = new Intent(StarterActivity.this, SettingActivity.class);
+                Intent intent = new Intent(MenuActivity.this, SettingActivity.class);
                 intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
                 intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 startActivity(intent);
@@ -129,15 +132,15 @@ public class StarterActivity extends BaseActivity {
     }
 
     private void initView() {
-        btnGame = findViewById(R.id.starter_BTN_playGame);
-        btnCharacters = findViewById(R.id.starter_BTN_Characters);
-        btnTopTen = findViewById(R.id.starter_BTN_showTopTen);
-        btnSetting = findViewById(R.id.starter_BTN_setting);
-        imgBackground = findViewById(R.id.starter_IMG_background);
+        menu_BTN_game = findViewById(R.id.menu_BTN_playGame);
+        menu_BTN_characters = findViewById(R.id.menu_BTN_Characters);
+        menu_BTN_topTen = findViewById(R.id.menu_BTN_showTopTen);
+        menu_BTN_setting = findViewById(R.id.menu_BTN_setting);
+        menu_IMG_background = findViewById(R.id.menu_IMG_background);
         Glide
                 .with(this)
                .load(R.drawable.background_field)
-                .into(imgBackground);
+                .into(menu_IMG_background);
 
     }
     private void playSound(int id){

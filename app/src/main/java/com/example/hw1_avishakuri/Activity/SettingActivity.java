@@ -11,56 +11,57 @@ import com.example.hw1_avishakuri.R;
 
 public class SettingActivity extends BaseActivity {
 
-    private Switch switchAutoGame;
-    private boolean boolAutoGame = true;
-    private Switch switchSound;
-    private boolean boolSound = true;
-    private Button btnReturn;
+    private Switch settinf_SWITCH_autoGame;
+    private boolean boolAutoGame ;
+    private Switch setting_SWITCH_sound;
+    private boolean boolSound ;
+    private Button setting_BTN_return;
 
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        MyScreenUtils.hideSystemUI(this);
         initView();
         clickOnButton();
     }
 
     private void clickOnButton() {
-        btnReturn.setOnClickListener(new View.OnClickListener() {
+        setting_BTN_return.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view){
-            Intent intent = new Intent(SettingActivity.this, StarterActivity.class);
+            Intent intent = new Intent(SettingActivity.this, MenuActivity.class);
             intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
             intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
             startActivity(intent);
             }
         });
 
-        switchSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        setting_SWITCH_sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked == false)
                 {
-                    switchSound.setChecked(false);
+                    setting_SWITCH_sound.setChecked(false);
                     boolSound=false;
                 }
                 else {
                     boolSound = true;
-                    switchSound.setChecked(true);
+                    setting_SWITCH_sound.setChecked(true);
                 }
             }
         });
 
-        switchAutoGame.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        settinf_SWITCH_autoGame.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked == false)
                 {
-                    switchAutoGame.setChecked(false);
+                    settinf_SWITCH_autoGame.setChecked(false);
                     boolAutoGame=false;
                 }
                 else {
-                    switchAutoGame.setChecked(true);
+                    settinf_SWITCH_autoGame.setChecked(true);
                     boolAutoGame = true;
                 }
             }
@@ -68,11 +69,13 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void initView() {
-        switchAutoGame = findViewById(R.id.setting_SWITCH_autoGame);
-        switchAutoGame.setChecked(getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true));
-        switchSound = findViewById(R.id.setting_SWITCH_sound);
-        switchSound.setChecked(getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true));
-        btnReturn = findViewById(R.id.setting_BTN_return);
+        settinf_SWITCH_autoGame = findViewById(R.id.setting_SWITCH_autoGame);
+        settinf_SWITCH_autoGame.setChecked(getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true));
+        boolAutoGame = getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true);
+        setting_SWITCH_sound = findViewById(R.id.setting_SWITCH_sound);
+        setting_SWITCH_sound.setChecked(getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true));
+        boolSound = (getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true));
+        setting_BTN_return = findViewById(R.id.setting_BTN_return);
     }
 
 }

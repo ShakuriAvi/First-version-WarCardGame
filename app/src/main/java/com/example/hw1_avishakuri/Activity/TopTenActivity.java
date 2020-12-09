@@ -2,6 +2,7 @@ package com.example.hw1_avishakuri.Activity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,15 +25,20 @@ public class TopTenActivity extends BaseActivity {
     private Fragment_Map fragment_map;
     private Gson gson;
     private ArrayList<Player> topTenWinner;
-    private Button btnReturn;
+    private Button topTen_BTN_return;
     public static String PACKAGE_NAME;
+    private boolean boolAutoGame;
+    private boolean boolSound;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_ten);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        clickOnButton();
+        MyScreenUtils.hideSystemUI(this);
         PACKAGE_NAME = getApplicationContext().getPackageName();
+        boolAutoGame = getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true);
+        boolSound = getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true);
+        clickOnButton();
         getListTopTen();
         fragment_list = new Fragment_List(topTenWinner);
         fragment_list.setCallBack_top(callBack_top);
@@ -44,11 +50,15 @@ public class TopTenActivity extends BaseActivity {
     }
 
     private void clickOnButton() {
-        btnReturn = findViewById(R.id.topTen_BTN_return);
-        btnReturn.setOnClickListener(new View.OnClickListener() {
+        topTen_BTN_return = findViewById(R.id.topTen_BTN_return);
+        topTen_BTN_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TopTenActivity.this, StarterActivity.class);
+                if(boolSound == true)
+                    playSound(R.raw.tiny_button_push);
+                Intent intent = new Intent(TopTenActivity.this, MenuActivity.class);
+                intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
+                intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 startActivity(intent);
             }
         }
@@ -72,6 +82,10 @@ public class TopTenActivity extends BaseActivity {
         }
     };
 
-
+    private void playSound(int id){
+        MediaPlayer mp;
+        mp = MediaPlayer.create(this,id);
+        mp.start();
+    }
 
 }

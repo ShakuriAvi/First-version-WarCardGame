@@ -1,26 +1,31 @@
 package com.example.hw1_avishakuri.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.example.hw1_avishakuri.Class.MyListAdapter;
 import com.example.hw1_avishakuri.Class.Player;
 import com.example.hw1_avishakuri.Controller.CallBack_Top;
 import com.example.hw1_avishakuri.R;
 
 import java.util.ArrayList;
 
-import static com.example.hw1_avishakuri.Activity.TopTenActivity.PACKAGE_NAME;
-
 public class Fragment_List extends Fragment{
-    private ArrayList<TextView> topTenTextView;
-    private ArrayList<ImageView> topTenIMGView;
+    private TextView textView;
+    private ImageView imageView;
+    private String[] listItemString;
+    private Integer[] listItemInt;
+    ListView listView;
+    private ImageView list_IMG_background;
     private CallBack_Top callBack_top;
     private ArrayList<Player> topTenWinner;
 
@@ -36,61 +41,73 @@ public class Fragment_List extends Fragment{
 
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        findViews(view);
-        changeText();
-        clickOnList();
+
+        findView(view);
+
         return view;
     }
 
-    public void clickOnList() {
+    private void findView(View view) {
+        listView = (ListView)view.findViewById(R.id.listView);
+        textView=(TextView)view.findViewById(R.id.list_LBL_place);
+        imageView=(ImageView)view.findViewById(R.id.list_IMG_place);
+        list_IMG_background = (ImageView) view.findViewById(R.id.list_IMG_background);
+        Glide
+                .with(getActivity())
+                .load(R.drawable.board_topten)
+                .into(list_IMG_background);
+        initListItem();
         for (int i = 0; i <10 ; i++) {
-            moveLocationOfPlayer(i,topTenTextView.get(i),topTenWinner.get(i));
+            if(topTenWinner.get(i)!=null) {
+                listItemString[i] = ((i + 1)) + ". " + topTenWinner.get(i).getName() + ", Score " + ": " + topTenWinner.get(i).getScore();
+                listItemInt[i] = topTenWinner.get(i).getIdImage();
+            }
+            else
+                break;
+
         }
+        MyListAdapter adapter;
+        if(listItemString.length == 0) {
+            listItemString = new String[1];
+            listItemInt = new Integer[1];
+            listItemString[0] = "The list is null ";
+            listItemInt[0] = R.drawable.draw_flag;
+            adapter = new MyListAdapter(getActivity(), listItemString, listItemInt);
+        }
+        else
+            adapter=new MyListAdapter(getActivity(), listItemString, listItemInt);
 
-
+        listView.setAdapter(adapter);
+        clickOnItem();
 
     }
 
-    private void moveLocationOfPlayer(int place, final TextView textViewPlayer, final Player player) {
-        textViewPlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    private void initListItem() {
+        ArrayList<String> tempArrayList = new ArrayList<String>() ;
+        for (int i = 0; i <10 ; i++) {
+            if(topTenWinner.get(i)!=null)
+                tempArrayList.add (i, "In");
+            else {
+                break;
+            }
+        }
+        listItemString = new String[tempArrayList.size()];
+        listItemInt = new Integer[tempArrayList.size()];
+    }
 
-                if (callBack_top != null) {
-                    if(player == null)
+    private void clickOnItem() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                for ( position = 0; position <listItemString.length ; position++) {
+                    if(listItemString[0] =="The list is null")
                         callBack_top.displayLocation(0,0);
                     else
-                        callBack_top.displayLocation(player.getLatitude(),player.getLongitude());
-
+                        callBack_top.displayLocation(topTenWinner.get(position).getLatitude(),topTenWinner.get(position).getLongitude());
                 }
             }
         });
     }
-
-    public void changeText() {
-
-        for (int i = 0; i <10 ; i++) {
-           if(topTenWinner.get(i) != null) {
-                topTenTextView.get(i).setText(" "+ (i + 1) + ". Name: " + topTenWinner.get(i).getName().toString() + "\n Score: " + topTenWinner.get(i).getScore() + " \n");
-                topTenIMGView.get(i).setImageResource(topTenWinner.get(i).getIdImage());
-            }
-            Log.d("pppp","" + topTenTextView.get(i).getText());
-        }
-    }
-
-    private void findViews(View view) {
-        topTenTextView = new ArrayList<TextView>();
-        topTenIMGView = new ArrayList<ImageView>();
-        for (int i = 1; i < 11; i++) {
-            String name = "list_LBL_place" + (i);
-            int idTxtView = view.getResources().getIdentifier(name, "id" , PACKAGE_NAME);
-            name = "list_IMG_place" + (i);
-            int idImgView = view.getResources().getIdentifier(name, "id" , PACKAGE_NAME);
-            topTenTextView.add((i - 1), (TextView) view.findViewById(idTxtView));
-            topTenIMGView.add((i - 1) , (ImageView) view.findViewById(idImgView));
-        }
-    }
-
 
 
 }

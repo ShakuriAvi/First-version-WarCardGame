@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.hw1_avishakuri.Activity.GameActivity;
-import com.example.hw1_avishakuri.Activity.StarterActivity;
+import com.example.hw1_avishakuri.Activity.MenuActivity;
 import com.example.hw1_avishakuri.Activity.TopTenActivity;
 import com.example.hw1_avishakuri.Class.Player;
 import com.example.hw1_avishakuri.R;
@@ -38,19 +38,21 @@ import static com.example.hw1_avishakuri.Controller.Constants.SP_FILE;
 public class FinishGameViewController {
 
     private Gson gson;
-    private ImageView picPlayerWin;
-    private TextView scorePlayerWin;
-    private Button btnNewGame;
-    private Button btnMenu;
-    private Button btnTopTen;
-    private Button btnSaveName;
-    private ImageView imgBackground;
-    private EditText txtReplaceName;
+    private ImageView finish_IMG_playerWin;
+    private TextView finish_TXT_scorePlayerWin;
+    private Button finish_BTN_newGame;
+    private Button finish_BTN_menu;
+    private Button finish_BTN_topTen;
+    private Button finish_BTN_saveName;
+    private ImageView finish_IMG_background;
+    private EditText finish_TXT_replaceName;
     Player playerWin;
     private ArrayList<Player> topTenWinner;
     private FusedLocationProviderClient client;
     private Context context;
     private AppCompatActivity activity;
+    private boolean boolAutoGame ;
+    private boolean boolSound ;
 
     public FinishGameViewController(AppCompatActivity activity) {
         this.activity = activity;
@@ -64,19 +66,19 @@ public class FinishGameViewController {
     }
 
     private void findView() {
-        picPlayerWin = activity.findViewById(R.id.finish_IMG_winner);
-        scorePlayerWin = activity.findViewById(R.id.finish_TXT_score);
-        btnNewGame = activity.findViewById(R.id.finish_BTN_newGame);
-        btnMenu = activity.findViewById(R.id.finish_BTN_menu);
-        btnTopTen = activity.findViewById(R.id.finish_BTN_topTen);
-        imgBackground = activity.findViewById(R.id.finish_IMG_background);
-        txtReplaceName = activity.findViewById(R.id.finish_TXT_replaceName);
-        btnSaveName = activity.findViewById(R.id.finish_BTN_saveName);
+        finish_IMG_playerWin = activity.findViewById(R.id.finish_IMG_winner);
+        finish_TXT_scorePlayerWin = activity.findViewById(R.id.finish_TXT_score);
+        finish_BTN_newGame = activity.findViewById(R.id.finish_BTN_newGame);
+        finish_BTN_menu = activity.findViewById(R.id.finish_BTN_menu);
+        finish_BTN_topTen = activity.findViewById(R.id.finish_BTN_topTen);
+        finish_IMG_background = activity.findViewById(R.id.finish_IMG_background);
+        finish_TXT_replaceName = activity.findViewById(R.id.finish_TXT_replaceName);
+        finish_BTN_saveName = activity.findViewById(R.id.finish_BTN_saveName);
         Glide
                 .with(activity)
                 .load(R.drawable.gaming_dice_cards_casino_chips_dark_background)
                 .centerCrop()
-                .into(imgBackground);
+                .into(finish_IMG_background);
     }
 
     private  void loadData() {
@@ -99,10 +101,12 @@ public class FinishGameViewController {
     }
 
     private void getPlayerWinFromOtherActivity() {
+        boolAutoGame = activity.getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true);
+        boolSound = activity.getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true);
         String p1 = activity.getIntent().getStringExtra("EXTRA_KEY_WINNER");
         playerWin = gson.fromJson(p1,Player.class);
-        picPlayerWin.setImageResource(playerWin.getIdImage());
-        scorePlayerWin.setText("The Score : "+ playerWin.getScore());
+        finish_IMG_playerWin.setImageResource(playerWin.getIdImage());
+        finish_TXT_scorePlayerWin.setText("The Score : "+ playerWin.getScore());
         getLocationOfUser();
         changeName();
         addPlayerToArr();
@@ -168,12 +172,14 @@ public class FinishGameViewController {
     }
 
     private void changeName() {
-        btnSaveName.setOnClickListener(new View.OnClickListener() {
+        finish_BTN_saveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerWin.setName(txtReplaceName.getText().toString());
+                if(!finish_TXT_replaceName.getText().toString().equals("Name") && !finish_TXT_replaceName.getText().toString().equals(null)){
+                     playerWin.setName(finish_TXT_replaceName.getText().toString());
             }
-        });
+        }
+    });
     }
     private void addPlayerToArr() {
         for (int i = 0; i <10 ; i++) {
@@ -198,23 +204,29 @@ public class FinishGameViewController {
         }
     }
     public void clickOnButton() {
-        btnNewGame.setOnClickListener(new View.OnClickListener() {
+        finish_BTN_newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveData();
                 Intent intent = new Intent(activity, GameActivity.class);
+                intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
+                intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 activity.startActivity(intent);
                activity.finish();
             }
         });
-        btnMenu.setOnClickListener(new View.OnClickListener() {
+        finish_BTN_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, StarterActivity.class);
+                saveData();
+                Intent intent = new Intent(activity, MenuActivity.class);
+                intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
+                intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 activity.startActivity(intent);
                activity.finish();
             }
         });
-        btnTopTen.setOnClickListener(new View.OnClickListener(){
+        finish_BTN_topTen.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
@@ -224,6 +236,8 @@ public class FinishGameViewController {
                 gson = new Gson();
                 String arrayTopTen = gson.toJson(topTenWinner);
                 intent.putExtra("EXTRA_KEY_WINNERS", arrayTopTen);
+                intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
+                intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
                 activity.startActivity(intent);
                 activity.finish();
             }

@@ -21,9 +21,9 @@ private Characters tempCharc;
 private Player player1;
 private  Player player2;
 private  boolean turnChoice = true;// if true turn player1 choose charc else turn player2 choose
-private ImageView starter_IMG_player1;
-private ImageView starter_IMG_player2;
-private Button btnReturn;
+private ImageView selectCharc_IMG_player1;
+private ImageView selectCharc_IMG_player2;
+private Button selectCharc_BTN_return;
 private Gson gson ;
 private boolean boolSound = true;
 private boolean boolAutoGame = true;
@@ -32,12 +32,13 @@ private boolean boolAutoGame = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_characters);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        MyScreenUtils.hideSystemUI(this);
         isDoubleBackPressToClose=true;
         initGameViewController = new InitGameViewController(this);
         initGameViewController.initCharcacters();
         tempCharc = initGameViewController.getTheCharacters();
         initView();
-        btnReturn.setOnClickListener(new View.OnClickListener(){
+        selectCharc_BTN_return.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 returnListiner();
@@ -49,7 +50,7 @@ private boolean boolAutoGame = true;
         if(boolSound)
             playSound(R.raw.tiny_button_push);
         gson= new Gson();
-        Intent intent = new Intent( SelectCharactersActivity.this, StarterActivity.class);
+        Intent intent = new Intent( SelectCharactersActivity.this, MenuActivity.class);
         String p1 = gson.toJson(player1);
         String p2 = gson.toJson(player2);
         intent.putExtra("EXTRA_KEY_MY_PLAYER1",p1);
@@ -60,9 +61,9 @@ private boolean boolAutoGame = true;
     }
 
     private void initView() {
-        starter_IMG_player1 = findViewById(R.id.starter_IMG_player1);
-        starter_IMG_player2 = findViewById(R.id.starter_IMG_player2);
-        btnReturn = findViewById(R.id.starter_BTN_return);
+        selectCharc_IMG_player1 = findViewById(R.id.starter_IMG_player1);
+        selectCharc_IMG_player2 = findViewById(R.id.starter_IMG_player2);
+        selectCharc_BTN_return = findViewById(R.id.starter_BTN_return);
         boolAutoGame =getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true);
         boolSound=getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true);
     }
@@ -76,12 +77,12 @@ private boolean boolAutoGame = true;
         String name = (String)img.getTag();
         if (turnChoice == true) {
             player1 = tempCharc.getPlayerByName(name);
-            starter_IMG_player1.setImageResource(player1.getIdImage());
+            selectCharc_IMG_player1.setImageResource(player1.getIdImage());
             turnChoice = false;
         }
         else {
             player2 = tempCharc.getPlayerByName(name);
-            starter_IMG_player2.setImageResource(player2.getIdImage());
+            selectCharc_IMG_player2.setImageResource(player2.getIdImage());
             turnChoice = true;
         }
 

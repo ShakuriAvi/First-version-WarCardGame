@@ -1,285 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:orientation="vertical"
->
-
-
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/list_IMG_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop" />
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-        android:background="@drawable/board_topten"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/list_TXT_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="casual"
-                android:gravity="center"
-                android:text="TOP TEN"
-                android:textColor="@color/white"
-                android:textSize="40dp" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        <TextView
+        android:id="@+id/list_TXT_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="TOP TEN"
+        android:textColor="@color/white"
+        android:textSize="40dp" />
 
 
-                <TextView
-                    android:id="@+id/list_LBL_place1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:gravity="left"
-                    android:text="1. Null"
-                    android:clickable="true"
-                    android:tag="1"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
+        <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        />
+    </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/list_IMG_place1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="3"
-
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                    android:id="@+id/list_LBL_place2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:gravity="left"
-                    android:text="2. Null"
-                        android:clickable="true"
-                        android:tag="2"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-
-                    <ImageView
-                        android:id="@+id/list_IMG_place2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="3"
-                        app:srcCompat="@drawable/ic_launcher_foreground" />
-                </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/list_LBL_place3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="casual"
-                android:gravity="left"
-                android:text="3. Null"
-                android:clickable="true"
-                android:tag="3"
-                android:textColor="@color/white"
-                android:textSize="30dp" />
-
-            <ImageView
-                android:id="@+id/list_IMG_place3"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
-        </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                android:id="@+id/list_LBL_place4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="casual"
-                android:gravity="left"
-                android:text="4. Null"
-                    android:clickable="true"
-                    android:tag="4"
-                android:textColor="@color/white"
-                android:textSize="30dp" />
-
-                <ImageView
-                    android:id="@+id/list_IMG_place4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="3"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/list_LBL_place5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:clickable="true"
-                    android:gravity="left"
-                    android:text="5. Null"
-                    android:tag="5"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-
-                <ImageView
-                    android:id="@+id/list_IMG_place5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="3"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/list_LBL_place6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:gravity="left"
-                    android:text="6. Null "
-                    android:clickable="true"
-                    android:tag="6"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-                    <ImageView
-                        android:id="@+id/list_IMG_place6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="3"
-                        app:srcCompat="@drawable/ic_launcher_foreground" />
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/list_LBL_place7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:clickable="true"
-                    android:gravity="left"
-                    android:text="7. Null "
-                    android:tag="7"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-                <ImageView
-                    android:id="@+id/list_IMG_place7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="3"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/list_LBL_place8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:clickable="true"
-                    android:gravity="left"
-                    android:text="8. Null "
-                    android:tag="8"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-                <ImageView
-                    android:id="@+id/list_IMG_place8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="3"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/list_LBL_place9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:clickable="true"
-                    android:gravity="left"
-                    android:text="9. Null "
-                    android:tag="9"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-                <ImageView
-                    android:id="@+id/list_IMG_place9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="3"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/list_LBL_place10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="casual"
-                    android:gravity="left"
-                    android:text="10. Null "
-                    android:tag="10"
-                    android:clickable="true"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-                    <ImageView
-                        android:id="@+id/list_IMG_place10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="3"
-                        app:srcCompat="@drawable/ic_launcher_foreground" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-</ScrollView>
+</RelativeLayout>

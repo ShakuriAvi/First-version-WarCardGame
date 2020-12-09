@@ -20,7 +20,7 @@
 
             <TextView
 
-                android:id="@+id/main_TXT_firstScore"
+                android:id="@+id/game_TXT_firstScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
@@ -29,7 +29,7 @@
                 android:textSize="50sp" />
 
             <ImageView
-                android:id="@+id/main_IMG_firstPlayer"
+                android:id="@+id/game_IMG_firstPlayer"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="50dp"
@@ -44,7 +44,7 @@
 
 
             <ProgressBar
-                android:id="@+id/main_PRG_timeGame"
+                android:id="@+id/game_PRG_timeGame"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_gravity="center"
                 android:layout_width="200dp"
@@ -62,7 +62,7 @@
 
 
                 <ImageView
-                    android:id="@+id/main_IMG_firstBackCard"
+                    android:id="@+id/game_IMG_firstBackCard"
                     android:layout_width="50dp"
                     android:layout_marginTop="50dp"
                     android:layout_height="match_parent"
@@ -70,7 +70,7 @@
                     app:srcCompat="@drawable/poker_back_card" />
 
                 <ImageView
-                    android:id="@+id/main_IMG_secondBackCard"
+                    android:id="@+id/game_IMG_secondBackCard"
                     android:layout_width="50dp"
                     android:layout_marginTop="50dp"
                     android:layout_height="match_parent"
@@ -80,7 +80,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/main_IMG_playButton"
+                android:id="@+id/game_IMG_playButton"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 app:srcCompat="@drawable/play_button" />
@@ -95,7 +95,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/main_TXT_secondPlayer"
+                android:id="@+id/game_TXT_secondPlayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
@@ -104,7 +104,7 @@
                 android:textSize="50sp" />
 
             <ImageView
-                android:id="@+id/main_IMG_secondPlayer"
+                android:id="@+id/game_IMG_secondPlayer"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="50dp"

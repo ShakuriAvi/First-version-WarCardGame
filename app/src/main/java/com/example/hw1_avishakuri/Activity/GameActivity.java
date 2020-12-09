@@ -5,8 +5,8 @@ import android.view.Window;
 
 import com.example.hw1_avishakuri.Class.Game;
 import com.example.hw1_avishakuri.Class.Player;
-import com.example.hw1_avishakuri.R;
 import com.example.hw1_avishakuri.Controller.InitGameViewController;
+import com.example.hw1_avishakuri.R;
 import com.google.gson.Gson;
 
 public class GameActivity extends BaseActivity {
@@ -15,20 +15,30 @@ private Game game;//the rule of game: move two card, choose random player,etc...
 private InitGameViewController initGameViewController;
 private boolean boolSound;
 private boolean boolAutoGame;
+private boolean boolOnStop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        MyScreenUtils.hideSystemUI(this);
         isDoubleBackPressToClose=true;
         initGame();
-        initGameViewController.initView(this,game);
-        initGameViewController.clickOnPlay(boolAutoGame,boolSound);
-
+        initGameViewController.initView(this, game);
+        initGameViewController.clickOnPlay(boolAutoGame, boolSound);
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(initGameViewController.isClickled() && boolAutoGame == true)
+            initGameViewController.startCounting();
+
+    }
+
 
     private void initGame() {
         gson = new Gson();
@@ -43,5 +53,10 @@ private boolean boolAutoGame;
         game = new Game(initGameViewController.getTheCharacters(), initGameViewController.getPackageCard(this),player1,player2);
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(boolAutoGame==true)
+            initGameViewController.stopCounting();
+    }
 }
