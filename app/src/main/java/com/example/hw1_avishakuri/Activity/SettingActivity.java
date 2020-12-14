@@ -1,12 +1,14 @@
 package com.example.hw1_avishakuri.Activity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
 import com.example.hw1_avishakuri.R;
 
 public class SettingActivity extends BaseActivity {
@@ -27,9 +29,12 @@ public class SettingActivity extends BaseActivity {
         clickOnButton();
     }
 
-    private void clickOnButton() {
+    private void clickOnButton() {//move to page menu the choice of user: sound and auto game
+
         setting_BTN_return.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view){
+                if (boolSound == true)
+                    playSound(R.raw.tiny_button_push);
             Intent intent = new Intent(SettingActivity.this, MenuActivity.class);
             intent.putExtra("EXTRA_KEY_MY_SoundPlay",boolSound);
             intent.putExtra("EXTRA_KEY_MY_AutoGame",boolAutoGame);
@@ -77,5 +82,9 @@ public class SettingActivity extends BaseActivity {
         boolSound = (getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true));
         setting_BTN_return = findViewById(R.id.setting_BTN_return);
     }
-
+    private void playSound(int id){
+        MediaPlayer mp;
+        mp = MediaPlayer.create(this,id);
+        mp.start();
+    }
 }

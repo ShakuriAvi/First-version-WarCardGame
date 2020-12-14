@@ -1,13 +1,18 @@
 package com.example.hw1_avishakuri.Controller;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.hw1_avishakuri.Activity.GameActivity;
@@ -22,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import static com.example.hw1_avishakuri.Controller.Constants.SP_FILE;
+import static com.example.hw1_avishakuri.Other.Constants.SP_FILE;
 
 public class MenuGameViewController {
     private AppCompatActivity activity;
@@ -44,9 +49,20 @@ public class MenuGameViewController {
     public void initMenu(){
         loadData();
         gson = new Gson();
+        askLocationPermission();
         initView();
         clickOnButton();
         initFromOtherActivity();
+    }
+    private void askLocationPermission(){//ask from user if we can get permissiom to use his location..If he did not agree every time he entered the menu it would ask him again
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)){
+                Log.d("bbbb", "ask location permission " );
+                ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},10001);
+            }else{
+                ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},10001);
+            }
+        }
     }
     private void initFromOtherActivity() {
         initPlayerFromActivitySelectCharc();
@@ -58,7 +74,7 @@ public class MenuGameViewController {
         boolSound = activity.getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true);
     }
 
-    private void initPlayerFromActivitySelectCharc() {
+    private void initPlayerFromActivitySelectCharc() {//get player that choice from menu
 
         String p1 = activity.getIntent().getStringExtra("EXTRA_KEY_MY_PLAYER1");
         player1 = gson.fromJson(p1,Player.class);
@@ -153,7 +169,7 @@ public class MenuGameViewController {
             initArrayList();
         }
     }
-    private void initArrayList() {
+    private void initArrayList() {//if the list is null
         topTenWinner = new ArrayList<Player>();
         for (int i = 0; i < 10; i++) {
             topTenWinner.add(i,null);

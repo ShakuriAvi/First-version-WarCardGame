@@ -138,7 +138,7 @@ public class InitGameViewController {
     }
 
     private Timer carousalTimer;
-    public void startCounting() {
+    public void startCounting() {//start timer
         carousalTimer = new Timer();
         carousalTimer.scheduleAtFixedRate(new TimerTask() {
             @Override

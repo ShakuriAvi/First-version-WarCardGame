@@ -4,6 +4,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
+
 public class BaseActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,7 @@ public class BaseActivity extends AppCompatActivity {
     private long mBackPressed;
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() { // for return back click twice and show message to user
         if (isDoubleBackPressToClose) {
             if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
                 super.onBackPressed();

@@ -1,4 +1,4 @@
-package com.example.hw1_avishakuri.Activity;
+package com.example.hw1_avishakuri.Other;
 
 import android.view.View;
 

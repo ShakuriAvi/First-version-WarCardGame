@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.example.hw1_avishakuri.Class.Characters;
 import com.example.hw1_avishakuri.Class.Player;
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
 import com.example.hw1_avishakuri.R;
 import com.example.hw1_avishakuri.Controller.InitGameViewController;
 import com.google.gson.Gson;
@@ -46,7 +47,7 @@ private boolean boolAutoGame = true;
         });
     }
 
-    private void returnListiner() {
+    private void returnListiner() {//return to page menu move the choice of player that user want
         if(boolSound)
             playSound(R.raw.tiny_button_push);
         gson= new Gson();
@@ -70,7 +71,7 @@ private boolean boolAutoGame = true;
 
 
     @SuppressLint("ResourceType")
-    public void clickOnImage(View view){
+    public void clickOnImage(View view){//choice the characters and show them to user
         if(boolSound)
             playSound(R.raw.tiny_button_push);
         ImageView img = (ImageView)view;

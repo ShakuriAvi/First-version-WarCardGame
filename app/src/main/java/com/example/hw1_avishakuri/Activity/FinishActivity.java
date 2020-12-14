@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.example.hw1_avishakuri.Controller.FinishGameViewController;
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
 import com.example.hw1_avishakuri.R;
 
 public class FinishActivity extends BaseActivity {

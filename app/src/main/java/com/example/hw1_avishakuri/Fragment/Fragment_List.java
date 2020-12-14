@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.hw1_avishakuri.Class.MyListAdapter;
 import com.example.hw1_avishakuri.Class.Player;
-import com.example.hw1_avishakuri.Controller.CallBack_Top;
+import com.example.hw1_avishakuri.Other.CallBack_Top;
 import com.example.hw1_avishakuri.R;
 
 import java.util.ArrayList;
@@ -38,12 +38,8 @@ public class Fragment_List extends Fragment{
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-
         findView(view);
-
         return view;
     }
 
@@ -56,7 +52,12 @@ public class Fragment_List extends Fragment{
                 .with(getActivity())
                 .load(R.drawable.board_topten)
                 .into(list_IMG_background);
-        initListItem();
+        initListItem();//init the list of topTen for listItem
+        initListView();// divide the name and score to string array and id of image to integer array and do listView
+
+    }
+
+    private void initListView() {
         for (int i = 0; i <10 ; i++) {
             if(topTenWinner.get(i)!=null) {
                 listItemString[i] = ((i + 1)) + ". " + topTenWinner.get(i).getName() + ", Score " + ": " + topTenWinner.get(i).getScore();
@@ -79,7 +80,6 @@ public class Fragment_List extends Fragment{
 
         listView.setAdapter(adapter);
         clickOnItem();
-
     }
 
     private void initListItem() {
@@ -96,15 +96,16 @@ public class Fragment_List extends Fragment{
     }
 
     private void clickOnItem() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//click on item move the location of the item that pressed
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                for ( position = 0; position <listItemString.length ; position++) {
-                    if(listItemString[0] =="The list is null")
-                        callBack_top.displayLocation(0,0);
-                    else
-                        callBack_top.displayLocation(topTenWinner.get(position).getLatitude(),topTenWinner.get(position).getLongitude());
+                if(  position == 0 && listItemString[0] == "The list is null ") {//if the list null the defult is :(0,0)
+                    callBack_top.displayLocation(0, 0);
                 }
+                    else{
+                        callBack_top.displayLocation(topTenWinner.get(position).getLatitude(), topTenWinner.get(position).getLongitude());
+                    }
+//
             }
         });
     }

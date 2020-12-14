@@ -33,7 +33,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.hw1_avishakuri.Controller.Constants.SP_FILE;
+import static com.example.hw1_avishakuri.Other.Constants.SP_FILE;
 
 public class FinishGameViewController {
 
@@ -53,6 +53,7 @@ public class FinishGameViewController {
     private AppCompatActivity activity;
     private boolean boolAutoGame ;
     private boolean boolSound ;
+    private  Location location;
 
     public FinishGameViewController(AppCompatActivity activity) {
         this.activity = activity;
@@ -81,7 +82,7 @@ public class FinishGameViewController {
                 .into(finish_IMG_background);
     }
 
-    private  void loadData() {
+    private  void loadData() {//load the last list from memory phone
         SharedPreferences prefs = activity.getSharedPreferences(SP_FILE, activity.MODE_PRIVATE);
         String json = prefs.getString("topTenArr", null);
         Type type = new TypeToken<ArrayList<Player>>() {
@@ -100,7 +101,7 @@ public class FinishGameViewController {
         }
     }
 
-    private void getPlayerWinFromOtherActivity() {
+    private void getPlayerWinFromOtherActivity() {//get from the game class the status of setting and details of winner
         boolAutoGame = activity.getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true);
         boolSound = activity.getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true);
         String p1 = activity.getIntent().getStringExtra("EXTRA_KEY_WINNER");
@@ -110,23 +111,24 @@ public class FinishGameViewController {
         getLocationOfUser();
         changeName();
         addPlayerToArr();
-        for (int i = 0; i <topTenWinner.size() ; i++) {
-            if(topTenWinner.get(i)!=null)
-                Log.d("cccc", " " + topTenWinner.get(i).getName() + " " + topTenWinner.get(i).getScore());
-        }
     }
-    private void getLocationOfUser() {
+    private void getLocationOfUser() {//gwt from user current location and check if status of location open if no thr defult is 0,0 and check another things....
 
         context = activity.getApplicationContext();
         client = LocationServices.getFusedLocationProviderClient(activity);
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location location = getLastLocation();
+             getLastLocation();
+            if(location!=null)
             playerWin.setLocation(location.getLatitude(),location.getLongitude());
+            else
+                playerWin.setLocation(0,0);
         } else {
-            askLocationPermission();
+            playerWin.setLocation(0,0);
+            Log.d("cccc", " " + playerWin.getLongitude() + playerWin.getLatitude());
         }
     }
-    private Location getLastLocation() {
+    private void getLastLocation() {
+        try {
         LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
         Location bestLocation = null;
@@ -139,7 +141,7 @@ public class FinishGameViewController {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-                return null;
+                location = null;
             }
             Location l = locationManager.getLastKnownLocation(provider);
 
@@ -154,24 +156,20 @@ public class FinishGameViewController {
             }
         }
         if (bestLocation == null) {
-            return null;
+            location = null;
         }
-        return bestLocation;
+            location= bestLocation;
+        }catch (Exception e){
+            location = new Location("");
+            location.setLatitude(0);
+            location.setLongitude(0);
+        }
 
     }
 
-    private void askLocationPermission(){
-        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)){
-                Log.d("bbbb", "ask location permission " );
-                ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},10001);
-            }else{
-                ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},10001);
-            }
-        }
-    }
 
-    private void changeName() {
+
+    private void changeName() {// save the name of user give the winner if the user dont change the name, each player stay with defult his name
         finish_BTN_saveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,7 +179,7 @@ public class FinishGameViewController {
         }
     });
     }
-    private void addPlayerToArr() {
+    private void addPlayerToArr() {//sorted and add new player to list of player
         for (int i = 0; i <10 ; i++) {
             if(topTenWinner.get(i) == null) {
                 topTenWinner.add(i,playerWin);
@@ -243,7 +241,7 @@ public class FinishGameViewController {
             }
         });
     }
-    private void saveData() {
+    private void saveData() {//save the last top ten list after sort
 
         SharedPreferences prefs = activity.getSharedPreferences(SP_FILE,activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();

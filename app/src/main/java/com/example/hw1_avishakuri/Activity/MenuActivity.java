@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.example.hw1_avishakuri.Controller.MenuGameViewController;
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
 import com.example.hw1_avishakuri.R;
 
 public class MenuActivity extends BaseActivity {

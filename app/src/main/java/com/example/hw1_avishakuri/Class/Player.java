@@ -13,8 +13,8 @@ public class Player  {
     {
         this.name = name;
         this.score = score;//maybe in HW2 we need to continue from the score in the last game
-        this.latitude = 31.993904;
-        this.longitude = 34.756071;
+        this.latitude =0;
+        this.longitude = 0;
     }
     public void setLocation( double newLatitude, double newLongitude)
     {

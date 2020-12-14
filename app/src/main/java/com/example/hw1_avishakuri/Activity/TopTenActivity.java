@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.hw1_avishakuri.Controller.CallBack_Top;
+import com.example.hw1_avishakuri.Class.Player;
 import com.example.hw1_avishakuri.Fragment.Fragment_List;
 import com.example.hw1_avishakuri.Fragment.Fragment_Map;
-import com.example.hw1_avishakuri.Class.Player;
+import com.example.hw1_avishakuri.Other.CallBack_Top;
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
 import com.example.hw1_avishakuri.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,7 +49,7 @@ public class TopTenActivity extends BaseActivity {
 
     }
 
-    private void clickOnButton() {
+    private void clickOnButton() {//return to menu and save the status of setting
         topTen_BTN_return = findViewById(R.id.topTen_BTN_return);
         topTen_BTN_return.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,7 @@ public class TopTenActivity extends BaseActivity {
         );
     }
 
-    private void getListTopTen() {
+    private void getListTopTen() {//get from menu or finish activity the top ten list from memory phone
         gson = new Gson();
         String json =  getIntent().getStringExtra("EXTRA_KEY_WINNERS");
         Type type = new TypeToken<ArrayList<Player>>(){}.getType();
@@ -73,11 +73,11 @@ public class TopTenActivity extends BaseActivity {
 
     }
 
-    private CallBack_Top callBack_top = new CallBack_Top() {
+    private CallBack_Top callBack_top = new CallBack_Top() {//move to fragment map location of user from fragment list
 
         @Override
         public void displayLocation(double lat, double lon) {
-            Log.d("zzzz","change" + lat + " "+ lon);
+         //   Log.d("zzzz","change" + lat + " "+ lon);
             fragment_map.setLatLong(lat,lon);
         }
     };

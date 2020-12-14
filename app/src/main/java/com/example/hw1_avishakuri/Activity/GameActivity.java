@@ -6,6 +6,7 @@ import android.view.Window;
 import com.example.hw1_avishakuri.Class.Game;
 import com.example.hw1_avishakuri.Class.Player;
 import com.example.hw1_avishakuri.Controller.InitGameViewController;
+import com.example.hw1_avishakuri.Other.MyScreenUtils;
 import com.example.hw1_avishakuri.R;
 import com.google.gson.Gson;
 
@@ -40,7 +41,7 @@ private boolean boolOnStop = false;
     }
 
 
-    private void initGame() {
+    private void initGame() {//get from menuActivity if user want sound, auto game and which player init
         gson = new Gson();
         String p1 = getIntent().getStringExtra("EXTRA_KEY_MY_PLAYER1");
         Player player1 = gson.fromJson(p1,Player.class);

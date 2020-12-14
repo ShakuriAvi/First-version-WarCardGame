@@ -47,6 +47,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
 
 
     public void setLatLong(double lat,double lon) {
+        Log.d("cccc", " " + lat + lon);
         this.lat = lat;
         this.lon = lon;
         newPlace = true;
@@ -60,8 +61,6 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
 
             this.googleMap = googleMap;
-
-            //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         markerOnMap(googleMap);
 
     }
