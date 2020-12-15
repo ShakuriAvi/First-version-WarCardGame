@@ -15,6 +15,7 @@ The opening screen of the game.
 # Selection of players:
 
 The game allows the user to select the players with whom he wants to play the game. If he does not select a specific player the game randomly selects two characters to play.
+
 ![Screenshot_20201215-073244](https://user-images.githubusercontent.com/65177459/102215937-183bc280-3ee3-11eb-8ddf-d6c9315c5910.jpg)
 
 # Setting:
@@ -25,11 +26,6 @@ Another option is to mute the sound in the game when pressing buttons or sound t
 
 ![Screenshot_20201215-063840](https://user-images.githubusercontent.com/65177459/102215942-196cef80-3ee3-11eb-9b72-2cde41ec8d7d.jpg)
 
-# Top Ten :
-
-The ten best players. Given the opportunity to see the ten highest records played in the game. In addition by clicking on one of the players in the list appears on the map where the same record was made, by using the map.
-
-![Screenshot_20201215-073459](https://user-images.githubusercontent.com/65177459/102215956-1c67e000-3ee3-11eb-9751-ee35f4a37eff.jpg)
 
 # Game : 
 
@@ -44,3 +40,8 @@ On the end screen you can change the default names given to players, by entering
 ![Screenshot_20201215-073435](https://user-images.githubusercontent.com/65177459/102215951-1b36b300-3ee3-11eb-8a5b-2fb6190df70e.jpg)
 
 
+# Top Ten :
+
+The ten best players. Given the opportunity to see the ten highest records played in the game. In addition by clicking on one of the players in the list appears on the map where the same record was made, by using the map.
+
+![Screenshot_20201215-073459](https://user-images.githubusercontent.com/65177459/102215956-1c67e000-3ee3-11eb-9751-ee35f4a37eff.jpg)
