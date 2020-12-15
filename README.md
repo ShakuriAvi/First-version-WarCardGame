@@ -1,7 +1,11 @@
 # War Cards Game
-
-
-# Different stages in the game
+The game is played between two players: in each turn two cards are drawn, the one who gets the highest card in that turn gets the point.
+In the game there are many options: you can see the list of the ten highest records and the location where the record was made by a map.
+You can select the players who will play the same game.
+You can mute the game sounds or play the game manually.
+You can change the winner's name and save the new name in the record table.
+The game can be width and length and you can exit and return from where the screen was stopped.
+There are many more options ...
 
 # Menu Game : 
 The opening screen of the game.
