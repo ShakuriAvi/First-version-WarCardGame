@@ -1,26 +1,32 @@
-# WarGame
+# War Cards Game
 
-Card war game between two different game characters, there are many characters in the game that are randomly selected at the beginning of the game.
 
 # Different stages in the game
 
-# Start Game : 
-
-![Screenshot_20201215-073314](https://user-images.githubusercontent.com/65177459/102215906-0fe38780-3ee3-11eb-82f0-bd1010849301.jpg)
-![Screenshot_20201215-073244](https://user-images.githubusercontent.com/65177459/102215937-183bc280-3ee3-11eb-8ddf-d6c9315c5910.jpg)
-![Screenshot_20201215-063840](https://user-images.githubusercontent.com/65177459/102215942-196cef80-3ee3-11eb-9b72-2cde41ec8d7d.jpg)
-![Screenshot_20201215-073435](https://user-images.githubusercontent.com/65177459/102215951-1b36b300-3ee3-11eb-8a5b-2fb6190df70e.jpg)
-![Screenshot_20201215-073459](https://user-images.githubusercontent.com/65177459/102215956-1c67e000-3ee3-11eb-9751-ee35f4a37eff.jpg)
+# Menu Game : 
+The opening screen of the game.
 ![Screenshot_20201215-063836](https://user-images.githubusercontent.com/65177459/102215962-1eca3a00-3ee3-11eb-973d-f02dc46f014d.jpg)
 
+# Selection of players:
+The game allows the user to select the players with whom he wants to play the game. If he does not select a specific player the game randomly selects two characters to playץ
+![Screenshot_20201215-073244](https://user-images.githubusercontent.com/65177459/102215937-183bc280-3ee3-11eb-8ddf-d6c9315c5910.jpg)
 
-# Middle Game :
+# Setting:
+You can change the game settings: the game will be played automatically or manually, automatically - with just one click on the button the cards will be drawn in pairs automatically until the cards in the deck are finished.
+Manual - Each push of a button will draw two cards from the deck until there are no cards left.
+Another option is to mute the sound in the game when pressing buttons or sound to change the clip.
+![Screenshot_20201215-063840](https://user-images.githubusercontent.com/65177459/102215942-196cef80-3ee3-11eb-9b72-2cde41ec8d7d.jpg)
 
-![Middle_Game](https://user-images.githubusercontent.com/65177459/99878855-fe270100-2c10-11eb-93eb-f5c035187b2e.jpg)
-# Announcement of the winner
+# Top Ten :
+The ten best players. Given the opportunity to see the ten highest records played in the game. In addition by clicking on one of the players in the list appears on the map where the same record was made, by using the map.
+![Screenshot_20201215-073459](https://user-images.githubusercontent.com/65177459/102215956-1c67e000-3ee3-11eb-9751-ee35f4a37eff.jpg)
 
-![End_Game](https://user-images.githubusercontent.com/65177459/99878860-02ebb500-2c11-11eb-8392-c6c9aa2f6440.jpg)
+# Game : 
+The game has 52 cards in the game, in each turn 2 cards are drawn, there is the option for automatic play or manual play according to the user's choice in the game settings. By pressing the play button the game is played.
+![Screenshot_20201215-073314](https://user-images.githubusercontent.com/65177459/102215906-0fe38780-3ee3-11eb-82f0-bd1010849301.jpg)
 
-In the game you can synchronize the screen horizontally and vertically, 
-by pressing the middle button to move cards to both participants, after the winner is announced you can click the new game button
-and in the new game two new players will be randomly selected and new game will start.
+# Announcement of the winner :
+On the end screen you can change the default names given to players, by entering a name and clicking save. This screen gives you the option to see the top ten, start a new game with random players or return to the main menu.
+![Screenshot_20201215-073435](https://user-images.githubusercontent.com/65177459/102215951-1b36b300-3ee3-11eb-8a5b-2fb6190df70e.jpg)
+
+
