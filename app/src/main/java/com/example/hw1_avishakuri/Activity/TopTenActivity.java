@@ -35,6 +35,7 @@ public class TopTenActivity extends BaseActivity {
         setContentView(R.layout.activity_top_ten);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         MyScreenUtils.hideSystemUI(this);
+        isDoubleBackPressToClose=true;
         PACKAGE_NAME = getApplicationContext().getPackageName();
         boolAutoGame = getIntent().getBooleanExtra("EXTRA_KEY_MY_AutoGame",true);
         boolSound = getIntent().getBooleanExtra("EXTRA_KEY_MY_SoundPlay",true);

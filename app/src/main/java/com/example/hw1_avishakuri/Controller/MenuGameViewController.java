@@ -89,7 +89,6 @@ public class MenuGameViewController {
             public void onClick(View view) {
                 if(boolSound == true)
                     playSound(R.raw.tiny_button_push);
-
                 Intent intent = new Intent(activity, GameActivity.class);
                 Gson gson = new Gson();
                 String p1 = gson.toJson(player1);

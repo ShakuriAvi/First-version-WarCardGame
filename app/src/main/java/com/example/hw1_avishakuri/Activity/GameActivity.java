@@ -1,4 +1,5 @@
 package com.example.hw1_avishakuri.Activity;
+
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
@@ -30,6 +31,7 @@ private boolean boolOnStop = false;
         initGameViewController.initView(this, game);
         initGameViewController.clickOnPlay(boolAutoGame, boolSound);
 
+
     }
 
     @Override
@@ -57,7 +59,7 @@ private boolean boolOnStop = false;
     @Override
     protected void onPause() {
         super.onPause();
-        if(boolAutoGame==true)
+        if(boolAutoGame==true&&initGameViewController.isClickled())
             initGameViewController.stopCounting();
     }
 }

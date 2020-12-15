@@ -60,7 +60,7 @@ public class Fragment_List extends Fragment{
     private void initListView() {
         for (int i = 0; i <10 ; i++) {
             if(topTenWinner.get(i)!=null) {
-                listItemString[i] = ((i + 1)) + ". " + topTenWinner.get(i).getName() + ", Score " + ": " + topTenWinner.get(i).getScore();
+                listItemString[i] = ((i + 1)) + ". " + topTenWinner.get(i).getName() + "\nScore " + ": " + topTenWinner.get(i).getScore();
                 listItemInt[i] = topTenWinner.get(i).getIdImage();
             }
             else
