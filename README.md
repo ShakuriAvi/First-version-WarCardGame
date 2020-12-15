@@ -6,7 +6,13 @@ Card war game between two different game characters, there are many characters i
 
 # Start Game : 
 
-![Start_Game](https://user-images.githubusercontent.com/65177459/99878711-fdda3600-2c0f-11eb-8144-3cbfea4879ee.jpg)
+![Screenshot_20201215-073314](https://user-images.githubusercontent.com/65177459/102215906-0fe38780-3ee3-11eb-82f0-bd1010849301.jpg)
+![Screenshot_20201215-073244](https://user-images.githubusercontent.com/65177459/102215937-183bc280-3ee3-11eb-8ddf-d6c9315c5910.jpg)
+![Screenshot_20201215-063840](https://user-images.githubusercontent.com/65177459/102215942-196cef80-3ee3-11eb-9b72-2cde41ec8d7d.jpg)
+![Screenshot_20201215-073435](https://user-images.githubusercontent.com/65177459/102215951-1b36b300-3ee3-11eb-8a5b-2fb6190df70e.jpg)
+![Screenshot_20201215-073459](https://user-images.githubusercontent.com/65177459/102215956-1c67e000-3ee3-11eb-9751-ee35f4a37eff.jpg)
+![Screenshot_20201215-063836](https://user-images.githubusercontent.com/65177459/102215962-1eca3a00-3ee3-11eb-973d-f02dc46f014d.jpg)
+
 
 # Middle Game :
 
