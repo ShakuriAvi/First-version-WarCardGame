@@ -1,5 +1,5 @@
 # War Cards Game
-The game is played between two players: in each turn two cards are drawn, the one who gets the highest card in that turn gets the point.
+The game is played between two players: in each turn two cards are drawn, the player who gets the highest card in that turn gets the point.
 In the game there are many options: you can see the list of the ten highest records and the location where the record was made by a map.
 You can select the players who will play the same game.
 You can mute the game sounds or play the game manually.
@@ -14,7 +14,7 @@ The opening screen of the game.
 
 # Selection of players:
 
-The game allows the user to select the players with whom he wants to play the game. If he does not select a specific player the game randomly selects two characters to play.
+The game allows the user to select the players with whom he wants to play the game. If he does not select a specific player the game randomly selects two player.
 
 ![Screenshot_20201215-073244](https://user-images.githubusercontent.com/65177459/102215937-183bc280-3ee3-11eb-8ddf-d6c9315c5910.jpg)
 
